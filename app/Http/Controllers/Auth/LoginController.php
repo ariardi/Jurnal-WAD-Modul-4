@@ -22,7 +22,8 @@ class LoginController extends Controller
         // ===============1==============
         // Validasi input login untuk email dan password.
         $credentials = $request->validate([
-            
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
         $remember = $request->has('remember');

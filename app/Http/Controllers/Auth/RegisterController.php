@@ -21,9 +21,14 @@ class RegisterController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6', 'confirmed'],
         ]);
+
         // ===============1==============
         // Simpan data user baru yang sudah ter-validasi ke database dengan role 'mahasiswa'.
         User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'mahasiswa',
             
         ]);
 

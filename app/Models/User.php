@@ -20,10 +20,14 @@ class User extends Authenticatable
 
     protected $table = 'users';
 
-    // ===============1==============
-    // Tambahkan kolom-kolom yang dapat diisi massal, termasuk 'role'.
+    
+    // 1. Tambahkan kolom 'name', 'email', 'password', dan 'role' pada tabel yang boleh diisi
     protected $fillable = [
-        
+                'name',
+                'email',
+                'password',
+                'role',
+        //isi disini
     ];    
 
     /**
@@ -49,13 +53,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function articles()
+    public function products()
     {
-        return $this->hasMany(\App\Models\Article::class);
+        return $this->hasMany(\App\Models\Product::class);
     }
 
-    public function comments()
+    public function reviews()
     {
-        return $this->hasMany(\App\Models\Comment::class);
+        return $this->hasMany(\App\Models\Review::class);
     }
 }

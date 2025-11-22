@@ -12,21 +12,23 @@ class BookController extends Controller
     // Ambil semua buku dari database, urutkan dari yang terbaru, dan kirimkan ke view 'books.index'.
     public function index()
     {
-        
+     $book = produc::all();
+     return view('admin index',compact('books'));   
     }
 
     // ===============2==============
     // Tampilkan detail buku tertentu berdasarkan buku dari parameter.
     public function show(Book $book)
     {
-        
+        $book = book::findOrFail($id);
+        return view('products.show', compact('book'));
     }
 
     // ===============3==============
     // Tampilkan form untuk menambahkan buku baru.
     public function create()
     {
-        
+        return view('admin.create');
     }
 
     public function store(Request $request)
@@ -53,7 +55,8 @@ class BookController extends Controller
     // Tampilkan form untuk mengedit buku tertentu berdasarkan buku dari parameter.
     public function edit(Book $book)
     {
-        
+         $book = book::findOrFail($id);
+        return view('admin.edit', compact('book'));
     }
 
     public function update(Request $request, Book $book)
@@ -82,6 +85,15 @@ class BookController extends Controller
     // Akhirnya, alihkan kembali ke daftar buku dengan pesan sukses.
     public function destroy(Book $book)
     {
-        
+        $book = book::findOrFail($id);
+
+        if ($product->image) {
+            Storage::delete('public/' . $book->image);
+        }
+
+        $book->delete();
+
+        session()->flash('success', 'Produk berhasil dihapus!');
+        return redirect()->route('admin.index');
     }
 }

@@ -65,7 +65,7 @@
                 @if(auth()->user()->role === 'admin')
                 <!-- ======================1====================== -->
                 <!-- Tampilkan tombol untuk ke halaman books.index -->
-                    <a href="" class="btn btn-outline-primary btn-sm">
+                    <a href="{{ route('books.index') }}" class="btn btn-outline-primary btn-sm">
                         Kelola Buku <i class="bi bi-arrow-right"></i>
                     </a>
                 @endif

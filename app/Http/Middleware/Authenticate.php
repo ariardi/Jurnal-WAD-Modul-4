@@ -11,14 +11,19 @@ class Authenticate
     {
         // ===============1==============
         // Jika rute yang diminta adalah 'login' atau 'register' atau '/', izinkan akses tanpa pemeriksaan autentikasi.
-        if () {
+        if ( 
+            $request->is('/') ||
+            $request->is('login') ||
+            $request->is('register')
+        ){
             return $next($request);
         }
 
         //// ===============2==============
         // Jika pengguna tidak terautentikasi, alihkan ke halaman login dengan pesan error.
-        if () {
-            return redirect()->route('login')->with('error', 'Silakan login untuk melanjutkan!');
+               if (!Auth::check()) {
+            return redirect()->route('login')
+                ->with('error', 'Silakan login untuk melanjutkan!');
         }
 
         return $next($request);
